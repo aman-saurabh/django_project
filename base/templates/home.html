@@ -1,0 +1,25 @@
+<!--Extending "main.html"-->
+{% extends 'main.html' %}
+
+<!--defining section for page specific content-->
+{% block content %}
+
+<h1 style="color: red">This is home page</h1>
+<div>
+    <p>User name : {{user.name|title}}</p>
+    <p>User location : {{user.city|capfirst}}</p>
+    <p>User Joining Date : {{user.joining_date|date:"Y-m-d"}}</p>
+    {% if user.age >= 18 %}
+    <p>User is an adult.</p>
+    {% elif user.age >= 13 %}
+    <p>User is adolescence.</p>
+    {% else %}
+    <p>User is child now.</p>
+    {% endif %}
+
+    <h2>List of rooms</h2>
+    {% for room in user.rooms %}
+        <h4>{{room.id}}.) <a href="/room/{{room.id}}">{{room.name}}</a></h4>
+    {% endfor %}
+</div>
+{% endblock %}

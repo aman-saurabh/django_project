@@ -1,0 +1,599 @@
+How to create a python virtual environment :-
+************************************************
+python3.10 -m venv django_venv
+************************************************
+You might get following error especially if you are creating virtual environment first time on your system : 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Error: Command '['/home/aman/Realtime Projects/django_venv/bin/python3.10', '-Im', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+It is because python3.10-dev and python3.10-venv are not installed in your system. You can install them as follows. But before that notice that even though python throw error in creating virtual environment but still it would have created virtual environment. So it is recommended to delete created virtual environment and create virtual environment again from beginning after running the following command. 
+*********************************************************************************
+sudo apt install python3.10-dev python3.10-venv -y
+########################################################################################################################################################################  
+
+
+
+
+
+How to activate a virtual environment :
+========================================================================================================================================================================
+Creating a virtaul environment itself won't be enough. You need to activate it as well to make it work. Infact you will need to activate it everytime when you open your project in virtual environment.
+*********************************************************
+source django_venv/bin/activate
+*********************************************************
+As soon as you activate your virtual environment you will find your virtual environment name(i.e "django_venv" in our case) is applied before the system name(i.e "aman@aman-pc" in our case) inside a parenthesis i.e as "(django_venv)".
+Ex :- 
+------------------------------------------------------------------------------------------
+aman@aman-pc:~/Realtime Projects/django_project$  source django_venv/bin/activate
+------------------------------------------------------------------------------------------
+# Here "source django_venv/bin/activate" is activation command.
+# After activation of the virtual environment now the terminal will look like :
+------------------------------------------------------------------------------------------
+(django_venv) aman@aman-pc:~/Realtime Projects/django_project$ 
+------------------------------------------------------------------------------------------
+Now if you run "python --version" or "pip --version"from inside this virtual environment, you will find reference of python 3.10 and not of your default python version of your system. It is because we have used python3.10 for creating this virtual environment. But if you run these commands outside this virtual environment again you will find reference of your system's default python version and not of python3.10
+########################################################################################################################################################################
+  
+
+
+
+
+How to deactivate a virtual environment :
+========================================================================================================================================================================
+To deactivate a python virtual environment you need to run following command:
+*********************************************************
+deactivate
+*********************************************************
+But note that you must be in a virtual environment for this to work. I.e if you havn't activated python viryual environment yet then this command won't make any effect. Infact any changes won't be needed as well. So if you are inside a python virtual environment your terminal should look like this before and after deactivation :
+*********************************************************
+# Before deactivation :-
+------------------------------------------------------------------------------------------
+(django_venv) aman@aman-pc:~/Realtime Projects/django_project$ deactivate
+------------------------------------------------------------------------------------------
+# Here "deactivate" is the deactivation command
+# After deactivation :-
+------------------------------------------------------------------------------------------
+aman@aman-pc:~/Realtime Projects/django_project$
+------------------------------------------------------------------------------------------
+# i.e as we can see (django_venv) is removed from the beginning after deactivation which is virtual environment name.
+########################################################################################################################################################################
+
+
+
+
+
+How to install pip packages inside virtual environment :-
+========================================================================================================================================================================
+Inside the virtual environment, By default, PIP3.10 should be installed(since we have used python 3.10 for creating this virtual environment), which is the most used package manager for Python3.10.
+To ensure that run following command :
+**************************
+pip3.10 --version 
+or, 
+pip --version
+or,
+pip3 --version
+**************************
+It will return result as follows :
+-----------------------------------------------------------------------------------------------------------------------------------------------
+pip 22.0.4 from /home/aman/Realtime Projects/django_project/django_venv/lib/python3.10/site-packages/pip (python 3.10)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Here we can see reference of python 3.10 which means it is compitable with python3.10. If your default python version is different than python 3.10 and if you run "pip --version or pip3 --version" outside this virtual environment you will find your pip version is different there, because there pip will refer to your system's default python version. Same is true for python as well.
+========================================================================================================================================================================
+Before you start installing pip packages upgrade your pip using following command:-
+***************************************************
+python3.10 -m pip install --upgrade pip
+***************************************************
+This command updated my pip version from 22.0.4 to 22.1.2. You can check if your pip upgraded using the followng command "pip --version". If your pip is not upgraded then it means you already have upgraded version of pip, so you don't need to worry.
+
+***********************************************************************************************
+**************************** Package installation command *************************************
+***********************************************************************************************
+
+Now finally you can install python packages as follows. Here we are installing "django" but you can using this syntax to install any pip package.
+***************************************************
+pip install django
+***************************************************
+It will print the final output as follows if your desired package(django in our case) is successfully installed.
+--------------------------------------------------------------------------
+Successfully installed asgiref-3.5.2 django-4.0.6 sqlparse-0.4.2
+--------------------------------------------------------------------------
+Notice that here asgiref-3.5.2 and sqlparse-0.4.2 are dependency packages of django which also get installed along with django.
+
+How to check installed pip package(django in our case) version :-
+***************************************************
+python -m django --version
+***************************************************
+########################################################################################################################################################################
+
+
+
+
+
+How to access Django admin :-
+========================================================================================================================================================================
+You can access Django admin using following command, in fact you can see the list of all available options for this command also using the following command :-
+***************************************************
+django-admin
+***************************************************
+Important ones are :
+***************************************************
+startapp
+startproject
+makemigrations
+migrate
+runserver 
+etc.
+***************************************************
+########################################################################################################################################################################
+
+
+
+
+
+How to create a django project :-
+========================================================================================================================================================================
+***************************************************
+django-admin startproject project_name
+# For example :-
+django-admin startproject django_project
+***************************************************
+Note that here django_project is the project name. You can change it as per your requirement. Also note that it is good idea to save the virtual environment also in the same folder where you are creating the project (However it is not necessary). So first create a parent directory and then create virtual environment inside that directory and finally create the project also inside that directory. For example our parent directory name is "django_projects" and inside that there are two folders now - 
+--------------------------------------------------------------------------------------------
+1.) django_venv - Which is virtual environment
+2.) django_project - Which is project name
+--------------------------------------------------------------------------------------------
+In future if you want to create another django project you can create that also here and share the virtual environment.
+--------------------------------------------------------------------------------------------
+Inside the django project (i.e. inside 'django_project' folder in our case) you will find two items -
+1.) A folder with same name as the project name(i.e. 'django_project' in our case)
+2.) manage.py - Which is used to manage and run the django project
+--------------------------------------------------------------------------------------------
+Note that :- Apart from above mentioned files you can also find a file - "db.sqlite3" whch is nothing but default database for django. If want to use some other database like "mysql", "postgres" or "mongodb" then just ignore it. 
+Now inside the inner folder whose name is same as project name (i.e. inside innter 'django_project' folder in our case) we will find following items :
+--------------------------------------------------------------------------------------------
+1.) __init__.py
+2.) asgi.py
+3.) settings.py
+4.) urls.py
+5.) wsgi.py
+--------------------------------------------------------------------------------------------
+Here wsgi.py is used for server, asgi.py is used for asynchronous calls and "__init__.py" is used to mark directory on disk as a Python package. So only "settings.py" and "urls.py" is important and they are used for following purposes.
+--------------------------------------------------------------------------------------------
+urls.py      :-  It is used to define and manage the urls for different pages of the project
+settings.py  :-  It is used as core project configuration. Like we can find here database configuration, list of all installed apps and middlewares, templates, static files configuration, list of allowed hosts, secret key etc. 
+--------------------------------------------------------------------------------------------
+Note that when you create an app for the project that app gets created outside of this inner project folder i.e on same level where the inner project and "manage.py" is residing i.e directly insdie the main project folder:
+########################################################################################################################################################################
+
+
+
+
+
+
+How to start a django project :-
+========================================================================================================================================================================
+After you create a django project you can run the project as follows :
+***************************************************
+cd django_project
+# To enter inside actual project folder(i.e. django_project in our case) where "manage.py" is residing 
+python3 manage.py runserver
+***************************************************
+########################################################################################################################################################################
+
+
+
+
+
+
+How to create an app inside a django project :-
+========================================================================================================================================================================
+To create an app enter inside the project folder(i.e. inside 'django_project' folder in our case where 'manage.py' file is residing) and also make sure that you are inside the virtual environment and then run the following command :-
+***************************************************
+python manage.py startapp app_name
+# For example :-
+python manage.py startapp base
+***************************************************
+Here "base" is the app name.
+This is where we will write our code. You can create many app inside a project but since our project is small we will use only one app(i.e 'base' app in our case)
+If you open the app folder(i.e 'base' folder in our case), you will find following items there :
+--------------------------------------------------------------------------------------------
+1.) migrations - A folder(the only folder insdie an app) - It is used to store migrations files.
+2.) __init__.py - It is used to mark directory on disk as a Python package
+3.) admin.py - 
+4.) apps.py -
+5.) models.py - It is used to create models for database
+6.) test.py - It is used to write test scripts
+7.) views.py - It is used to create pages i.e we define functions, perform all necessary steps here and finally bind that with urls.
+--------------------------------------------------------------------------------------------
+Apart from that every app can have a "urls.py" file as well which you need to manually create. It is used to manage app specific urls.
+
+Now you created a new app. You need to register it with the project. For that go to projects "settings.py" file and add following inside 'INSTALLED_APPS' as follows :
+--------------------------------------------------------------------------------------------
+INSTALLED_APPS = [
+    .......
+    .......
+    .......
+    'base.apps.BaseConfig'
+] 
+--------------------------------------------------------------------------------------------
+If you open "apps.py" file inside "base" app folder. You will find that classname as "baseConfig". Here we are referencing that only.
+########################################################################################################################################################################
+
+
+
+
+
+
+Working of URLs in django :-
+========================================================================================================================================================================
+Basically in project's "urls.py" file we can bind a path with a function as follows :
+--------------------------------------------------------------------------------------------
+from django.contrib import admin
+from django.urls import path
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Home page");
+
+def room(request):
+    return HttpResponse("Room page");
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home),
+    path('room/', room)
+]
+--------------------------------------------------------------------------------------------
+Here "HttpResponse" imported from package "django.http" is used to return an http response in string format.
+As you can see to define a route we did nothing, we just define the path and bind a function with the path this is how basically "urls" work in django. You can access these urls on browser on the following path :
+--------------------------------------------------------------------------------------------
+http://localhost:8000/
+http://localhost:8000/room/
+--------------------------------------------------------------------------------------------
+But this is just for basic understanding of how "urls" work in django. In real projects we use app and bind app's views function with the route. We can do that as follows :
+Copy the same "home" and "room" function and paste it inside "base -> views.py" file. So now your base app "views.py" file should look as follows :
+--------------------------------------------------------------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def home(request):
+    return HttpResponse("Home page");
+
+def room(request):
+    return HttpResponse("Room page");
+--------------------------------------------------------------------------------------------
+Now create a "urls.py" file insdie base app as well. Remember we have discussed that every app can also have their own "urls.py" file and we need to create that manually. We discussed it in section - "How to create an app inside a django project". Now write the following code in "base -> urls.py" file :
+--------------------------------------------------------------------------------------------
+from django.urls import path
+import views
+
+urlpatterns = [
+    path('', views.home, name="home"),
+    # Here first paramter is path, 2nd one is views function name and 3rd one a name for the path 
+    # We can use 3rd paramter i.e 'name' to reference the url from some other page.
+    path('room/', views.room, name="room") 
+]
+--------------------------------------------------------------------------------------------
+Now we need to attach this "urls.py" file with project's main "urls.py" file. For that modify the project's main "urls.py" file as follows :
+--------------------------------------------------------------------------------------------
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('base.urls'))
+]
+--------------------------------------------------------------------------------------------
+Now again we can open the urls on the following path
+--------------------------------------------------------------------------------------------
+http://localhost:8000/
+http://localhost:8000/room/
+--------------------------------------------------------------------------------------------
+########################################################################################################################################################################
+
+
+
+
+
+
+Working with templates in Django :-
+========================================================================================================================================================================
+Templates is nothing but html files. In above examples we just return "strings" as hhtp response but that is not how a web application works. Generally we render a HTML file on any specified URL. So to achieve that we need templates. We can use templates in django as follows :
+First create a "templates" directory inside the main project folder i.e in the same path where "manage.py" is residing. Note that "templates" name is not mandatory and you can keep other name as well but "templates" name is standard and recommended).
+Now create an html page inside this let's say "home.html". Modify it as follows :
+--------------------------------------------------------------------------------------------
+<h1 style="color: red;">This is home page</h1>
+--------------------------------------------------------------------------------------------
+Now we need to register 'templates' folder with the project's 'settings.py' file. For that open 'settings.py' file and inside that in 'TEMPLATES' section 'DIRS' array, modify that as follows :
+--------------------------------------------------------------------------------------------
+TEMPLATES = [
+    {
+        ..................
+        ..................
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ],
+        ..................
+        ..................
+    },
+]
+--------------------------------------------------------------------------------------------
+Here "BASE_DIR" referes to base directory. It is defined in the same file i.e 'settings.py' file. You can check it's value(In the top section of this file).  
+Now after we created a template and registered 'templates' folder as 'TEMPLATES' in the project's settings.py file. We can use it in any app's views file i.e. ("base -> views.py" file in our case) as follows :
+--------------------------------------------------------------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def home(request):
+    return render(request, 'home.html');
+
+def room(request):
+    return HttpResponse("Room page");
+--------------------------------------------------------------------------------------------
+Notice that "render" method was pre-imported from 'django.shortcuts' package. So we have directly used it.
+Here we rendered template for 'home' only, but you can create a template for room as well as render it in views file in the similar manner.
+********************************************************************************************
+********************* Important Update about template **************************************
+********************************************************************************************
+In any djnago project there will be two types of templates :
+1.) Which are used in a specific app only :
+For example :- App specific page like projects 'home' page will be used in a specific app only. Not all app will have 'home' page. So such templates we can create inside that particular app also. For that you have to create a "templates" folder inside that app and there we can keep our app specific templates. So we can keep our 'home.html' at following location also :
+django_project -> base -> templates -> home.html
+But it is not necessary and we can keep it at main "templates" folder also i.e at following location also :
+django_project -> templates -> home.html 
+2.) Which are used in different apps i.e in entire project :
+For example :- navbar.html, sidebar.html, footer.html. These files should only be kept at main "templates" folder also i.e at following location also :
+django_project -> templates -> home.html
+### Notes :-
+i.) The benefit of keeping app specific templates inside app's 'templates' folder is that if our project is complex and has many apps and if we keep all templates files in main 'templates' folder itself then searching a particular template can be tedious task we can be confused that which file belong to which app. So kepping such templates inside the app itself will make our project look more organised. 
+ii.) For keeping app specific templates inside app's 'templates' folder, we don't have to make any changes in "setting.py" file. Infact we don't have to make any changes in "views.py" file as well. It will work as exactally same way as earlier.
+iii.) We have not discussed about 'Template inheritence' so far. We have discussed it in next section. In 'Template inheritence' basically we use the reference of one template in another template and use their content in that. For example :- For example we generally create a template for 'navbar' and use that 'navbar.html' file in many other templates like 'home.html', 'room.html' etc. If you keep 'navbar.html' in main 'templates' folder and 'home.html' in app's 'template' folder then don't think that you will have to make some changes to achive 'Template inheritence'. Even though you have kept app specific templates inside app's 'templates' folder but think like it is still kept inside main 'templates' folder itself. As this is how templates work. Think like there is some kind of internal connection in between app's templates folder and main templates folder and main templates folder treat files inside any app's templates folder also like they are inside them.  
+########################################################################################################################################################################
+
+
+
+
+
+
+Template inheritence in django :-
+========================================================================================================================================================================
+In any web application we generally share same content at several places. Like in most web applications generally we have same navbar, sidebar, footer in all the pages and only the main content area changes in all pages. So creating same design in all pages will make our task cumbersome and repeatative. Won't it be good if we create it once and reuse it everywhere. We can achieve that as follows : 
+For example let's create a seperate file for navbar and use it in home.html page which we created in the previous section.
+Let's create a folder inside 'templates' folder with name 'layout' and now create a file 'navbar.html' inside this 'layout' folder with following content. 
+--------------------------------------------------------------------------------------------
+<a href="/"><h1>Logo</h1></a>
+<hr />
+--------------------------------------------------------------------------------------------
+Now to use it inside 'home.html' modify 'home.html' as follows :
+--------------------------------------------------------------------------------------------
+{% include 'layout/navbar.html' %}
+<h1 style="color: red;">This is home page</h1>
+--------------------------------------------------------------------------------------------
+### Note :- Alternate and more preferred method :-
+Here we have only navbar as common display for pages but as we discussed in an application we can have some other common display as well. So in such cases still we will have to include all such common display templates in every pages.So it would be better if we create a template page where we include all common displays and create a section where we can display content for any particular page. We can achieve it as follows :
+First let's create a main.html page with following content :-
+--------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DjangoProject</title>
+</head>
+<body>
+    <!--Including navbar here-->
+    {% include 'layout/navbar.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html> 
+--------------------------------------------------------------------------------------------
+Now let's modify "home.html" to reference "main.html" from it. Now our "home.html" should look like below :
+--------------------------------------------------------------------------------------------
+<!--Extending "main.html"-->
+{% extends 'main.html' %}
+
+<!--defining section for page specific content-->
+{% block content %}
+
+<h1 style="color: red">This is home page</h1>
+
+{% endblock %}
+-------------------------------------------------------------------------------------------- 
+########################################################################################################################################################################
+
+
+
+
+
+
+Using variables in Django templates(Using data in django templates) :-
+# Note :- How to pass data in templates we will learn in next section. In this section we will learn how to use them if available.
+========================================================================================================================================================================
+We can use variables in django templates as follows :
+--------------------------------------------------------------------------------------------
+My first name is {{ first_name }}. My last name is {{ last_name }}.
+In place of string type variables we can also use dictionary type, object type and list type variables as follows :
+{{ my_dict.key }}
+{{ my_object.attribute }}
+{{ my_list.0 }}
+--------------------------------------------------------------------------------------------
+# If else condition :-
+--------------------------------------------------------------------------------------------
+# 1st Example :- Simple if condition :-
+{% if somevar == "x" %}
+  This appears if variable somevar equals the string "x"
+{% endif %}
+********************************************************************
+
+# 2nd Example :- Complex if-else conditions :-
+{% if athlete_list %}
+    Number of athletes: {{ athlete_list|length }}
+{% elif athlete_in_locker_room_list %}
+    Athletes should be out of the locker room soon!
+{% else %}
+    No athletes.
+{% endif %}
+********************************************************************
+
+# 3rd Example :- Using "!=" and "==" with if-else
+{% if somevar == "x" %}
+  This appears if variable somevar equals the string "x"
+{% endif %}
+
+{% if somevar != "x" %}
+  This appears if variable somevar does not equal the string "x",
+  or if somevar is not found in the context
+{% endif %}
+********************************************************************
+
+# 4th Example :- Using 'and', 'or', 'not' with if-else condition :-
+{% if not athlete_list or coach_list %}
+    There are no athletes or there are some coaches.
+{% endif %}
+
+{% if athlete_list and not coach_list %}
+    There are some athletes and absolutely no coaches.
+{% endif %}
+--------------------------------------------------------------------------------------------
+# For loop :-
+--------------------------------------------------------------------------------------------
+# 1st Example :- Simple for loop over a list or list of objects :-
+{% for athlete in athlete_list %}
+    <li>{{ athlete.name }}</li>
+{% endfor %}
+********************************************************************
+
+# 2nd Example :- Loop over a list of lists :-
+points = [[2,3], [5,8]]
+{% for x, y in points %}
+    There is a point at {{ x }},{{ y }}
+{% endfor %}
+********************************************************************
+
+# 3rd example :- Loop over a dictionary(Not over list of dictionary) :-
+data = {"name":"Aman", "city": "Patna"};
+{% for key, value in data.items %}
+    {{ key }}: {{ value }}
+{% endfor %}
+********************************************************************
+
+# 4th Example :- Using "endfor" with "empty" :-
+<ul>
+{% for athlete in athlete_list %}
+    <li>{{ athlete.name }}</li>
+{% empty %}
+    <li>Sorry, no athletes in this list.</li>
+{% endfor %}
+</ul>
+--------------------------------------------------------------------------------------------
+# In operator :-
+--------------------------------------------------------------------------------------------
+{% if "bc" in "abcdef" %}
+  This appears since "bc" is a substring of "abcdef"
+{% endif %}
+
+{% if "hello" in greetings %}
+  If greetings is a list or set, one element of which is the string
+  "hello", this will appear.
+{% endif %}
+
+{% if user in users %}
+  If users is a QuerySet, this will appear if user is an
+  instance that belongs to the QuerySet.
+{% endif %}
+--------------------------------------------------------------------------------------------
+# Commens :-
+--------------------------------------------------------------------------------------------
+# 1st Example :- Single line comment :-
+{# this won't be rendered #}
+********************************************************************
+
+# 2nd Example :- Multiline comment :-
+{% comment %}
+    <p>This is the text to be commented.</p>
+    <p>It was created on {{ create_date|date:"c" }}</p>
+{% endcomment %}
+### Note :- You can insert an optional note in the opening block. This can be used to mention why you are commenting this portion. Ex :-
+{% comment "Commenting it as temporary solution" %}
+    <p>Commented out text with {{ create_date|date:"c" }}</p>
+{% endcomment %} 
+--------------------------------------------------------------------------------------------
+# Filters :- Filters transform the values of variables and tag arguments.
+For more details check - https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#ref-templates-builtins-filters
+--------------------------------------------------------------------------------------------
+# 1st Example :- Suppose we have a veriable as follows :
+info = django is a web framework for perfectionists with deadlines
+And we want to convert it into a title i.e we want to capitalize first letter of every word in it. We can achieve that with the help of 'title' filter as follows :
+{{ info|title }}
+O/p :- Django Is A Web Framework For Perfectionists With Deadlines
+********************************************************************
+
+# 2nd Example :- Some filters take arguments also. For example 'date' filter. Ex :
+{{ my_date|date:"Y-m-d" }}
+
+# 3rd Example :- 'capfirst' filter - Capitalizes the first character of the string.
+# Note that 'title' filter capitalize first character of every word of the string while 
+# 'capfirst' filter capitalize first character of the entire string i.e of first word only.
+{{ info|title }}
+O/p :- Django is a web framework for perfectionists with deadlines
+--------------------------------------------------------------------------------------------
+########################################################################################################################################################################
+
+
+
+
+
+Using variables in Django templates(Using data in django templates) :-
+========================================================================================================================================================================
+In app's(i.e 'base' app in our case) views file i.e ('base' -> 'views.py' file) :-
+--------------------------------------------------------------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime
+
+user_info = {"name": "aman saurabh", "city": "greater noida", "age": 17, "joining_date": datetime.now()}
+
+# Create your views here.
+def home(request):
+    return render(request, 'home.html', {"user": user_info});
+
+def room(request):
+    return HttpResponse("Room page");
+--------------------------------------------------------------------------------------------
+
+Now we can use it in our template 'home.html' page as follows :-
+--------------------------------------------------------------------------------------------
+<!--Extending "main.html"-->
+{% extends 'main.html' %}
+
+<!--defining section for page specific content-->
+{% block content %}
+
+<h1 style="color: red">This is home page</h1>
+<div>
+    <p>User name : {{user.name|title}}</p>
+    <p>User location : {{user.city|capfirst}}</p>
+    <p>User Joining Date : {{user.joining_date|date:"Y-m-d"}}</p>
+    {% if user.age >= 18 %}
+    <p>User is an adult.</p>
+    {% elif user.age >= 13 %}
+    <p>User is adolescence.</p>
+    {% else %}
+    <p>User is child now.</p>
+    {% endif %}
+</div>
+{% endblock %}
+--------------------------------------------------------------------------------------------
+# Note that here we have used 'title', 'capfirst' and 'date' filters and if-else conditions. 
+# Check previous section or Django official documentation for details:
+########################################################################################################################################################################
+
+
+
+

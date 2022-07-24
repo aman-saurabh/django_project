@@ -1,0 +1,16 @@
+<!--Extending "main.html"-->
+{% extends 'main.html' %}
+
+<!--defining section for page specific content-->
+{% block content %}
+
+<h1 style="color: red">This is room page</h1>
+<div>
+    {% if room != None %}
+    <p>Room id : {{room.id}}</p>
+    <p>Room name : {{room.name}}</p>
+    {% else %}
+    <p>Room not found.</p>
+    {% endif %}
+</div>
+{% endblock %}
